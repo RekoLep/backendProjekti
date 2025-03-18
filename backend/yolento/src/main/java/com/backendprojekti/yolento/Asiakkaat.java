@@ -12,11 +12,11 @@ public class Asiakkaat {
     private String puhelinnumero;
     private String sahkoposti;
 
-    // Oletuskonstruktori
+    
     public Asiakkaat() {
     }
 
-    // Parametrillinen konstruktori
+    
     public Asiakkaat(long asiakasId, String etunimi, String sukunimi, String puhelinnumero, String sahkoposti) {
         this.asiakasId = asiakasId;
         this.etunimi = etunimi;
@@ -25,7 +25,7 @@ public class Asiakkaat {
         this.sahkoposti = sahkoposti;
     }
 
-    // Getterit ja setterit
+   
     public long getAsiakasId() {
         return asiakasId;
     }

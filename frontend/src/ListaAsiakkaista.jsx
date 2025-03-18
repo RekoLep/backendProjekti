@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const Asiakkaat = () => {
+const ListaAsiakkaista = () => {
   const [asiakkaat, setAsiakkaat] = useState([]);
 
   useEffect(() => {
-    // Hae asiakkaita API:sta
-    fetch('http://localhost:8080/api/asiakkaat')
-      .then(response => response.json())
-      .then(data => setAsiakkaat(data))
-      .catch(error => console.error('Virhe asiakkaita haettaessa:', error));
+    fetch("http://localhost:8080/api/asiakkaat")
+      .then((response) => response.json())
+      .then((data) => setAsiakkaat(data))
+      .catch((error) => console.error("Virhe asiakkaiden hakemisessa:", error));
   }, []);
 
   return (
@@ -25,7 +25,7 @@ const Asiakkaat = () => {
           </tr>
         </thead>
         <tbody>
-          {asiakkaat.map(asiakas => (
+          {asiakkaat.map((asiakas) => (
             <tr key={asiakas.asiakasId}>
               <td>{asiakas.asiakasId}</td>
               <td>{asiakas.etunimi}</td>
@@ -36,8 +36,9 @@ const Asiakkaat = () => {
           ))}
         </tbody>
       </table>
+      <Link to="/index">Takaisin etusivulle</Link>
     </div>
   );
 };
 
-export default Asiakkaat;
+export default ListaAsiakkaista;
