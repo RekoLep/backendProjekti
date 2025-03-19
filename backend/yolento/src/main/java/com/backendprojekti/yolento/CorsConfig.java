@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-// Noniin, tässä luokassa annetaan oikeudet reactille tehdä pyyntöjä palvelimelta
+// tässä luokassa annetaan oikeudet reactille tehdä pyyntöjä palvelimelta
 @Configuration
 public class CorsConfig {
     @Bean

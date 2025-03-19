@@ -11,6 +11,12 @@ const VuokrasopimusPage = () => {
   });
   const [editVuokrasopimus, setEditVuokrasopimus] = useState(null);
   const [deleteId, setDeleteId] = useState("");
+  const handleEdit = (id) => {
+    const vuokrasopimus = vuokrasopimukset.find((v) => v.id === id);
+    if (vuokrasopimus) {
+      setEditVuokrasopimus({ ...vuokrasopimus });
+    }
+  };
 
   // Hakee kaikki vuokrasopimukset alussa
   useEffect(() => {
@@ -56,38 +62,43 @@ const VuokrasopimusPage = () => {
 
   // Päivittää vuokrasopimuksen
   const handleUpdate = () => {
-    if (!editVuokrasopimus) return;
-
-    const updatedVuokrasopimus = {
-      id: editVuokrasopimus.id,
-      asiakas: { asiakasId: Number(editVuokrasopimus.asiakas.asiakasId) },
-      asunto: { asuntoId: Number(editVuokrasopimus.asunto.asuntoId) },
-      alkamisaika: editVuokrasopimus.alkamisaika,
-      paattymisaika: editVuokrasopimus.paattymisaika || null,
-    };
+    if (!editVuokrasopimus || !editVuokrasopimus.id) {
+      console.error("Virhe: editVuokrasopimus ei ole määritelty oikein.");
+      return;
+    }
 
     fetch(`http://localhost:8080/api/vuokrasopimukset/${editVuokrasopimus.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedVuokrasopimus),
+      body: JSON.stringify({
+        id: editVuokrasopimus.id,  
+        asiakas: {
+          asiakasId: editVuokrasopimus.asiakas.asiakasId
+        },
+        asunto: {
+          asuntoId: editVuokrasopimus.asunto.asuntoId
+        },
+        alkamisaika: editVuokrasopimus.alkamisaika,
+        paattymisaika: editVuokrasopimus.paattymisaika || null
+      }),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Virhe palvelimella: " + response.status);
+          throw new Error("Päivitys epäonnistui.");
         }
         return response.json();
       })
       .then((data) => {
         setVuokrasopimukset(
-          vuokrasopimukset.map((v) => (v.id === data.id ? data : v))
+          vuokrasopimukset.map((v) =>
+            v.id === data.id ? data : v
+          )
         );
         setEditVuokrasopimus(null);
       })
-      .catch((error) =>
-        console.error("Virhe vuokrasopimuksen päivittämisessä:", error)
-      );
+      .catch((error) => console.error("Virhe vuokrasopimuksen päivittämisessä:", error));
   };
 
   // Poistaa vuokrasopimuksen
@@ -203,36 +214,48 @@ const VuokrasopimusPage = () => {
           <div>
             <input
               type="number"
-              value={editVuokrasopimus.asiakasId}
+              value={editVuokrasopimus.asiakas.asiakasId}
               onChange={(e) =>
-                setEditVuokrasopimus({ ...editVuokrasopimus, asiakasId: e.target.value })
+                setEditVuokrasopimus({
+                  ...editVuokrasopimus,
+                  asiakas: { ...editVuokrasopimus.asiakas, asiakasId: Number(e.target.value) }
+                })
               }
             />
           </div>
           <div>
             <input
               type="number"
-              value={editVuokrasopimus.asuntoId}
+              value={editVuokrasopimus.asunto.asuntoId}
               onChange={(e) =>
-                setEditVuokrasopimus({ ...editVuokrasopimus, asuntoId: e.target.value })
+                setEditVuokrasopimus({
+                  ...editVuokrasopimus,
+                  asunto: { ...editVuokrasopimus.asunto, asuntoId: Number(e.target.value) }
+                })
               }
             />
           </div>
           <div>
             <input
               type="date"
-              value={editVuokrasopimus.aloitusPvm}
+              value={editVuokrasopimus.alkamisaika}
               onChange={(e) =>
-                setEditVuokrasopimus({ ...editVuokrasopimus, aloitusPvm: e.target.value })
+                setEditVuokrasopimus({
+                  ...editVuokrasopimus,
+                  alkamisaika: e.target.value
+                })
               }
             />
           </div>
           <div>
             <input
               type="date"
-              value={editVuokrasopimus.loppuPvm}
+              value={editVuokrasopimus.paattymisaika || ""}
               onChange={(e) =>
-                setEditVuokrasopimus({ ...editVuokrasopimus, loppuPvm: e.target.value })
+                setEditVuokrasopimus({
+                  ...editVuokrasopimus,
+                  paattymisaika: e.target.value || null
+                })
               }
             />
           </div>
