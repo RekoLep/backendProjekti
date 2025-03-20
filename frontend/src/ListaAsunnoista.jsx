@@ -149,6 +149,44 @@ const ListaAsunnoista = () => {
         </div>
       )}
 
+      {/*Uuden asunnon lisäys*/}
+      <div>
+        <h2>Lisää uusi asunto</h2>
+        <div>
+          <input
+            type="text"
+            placeholder="Osoite"
+            value={uusiAsunto.osoite}
+            onChange={(e) => setUusiAsunto({ ...uusiAsunto, osoite: e.target.value })}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Kaupunki"
+            value={uusiAsunto.kaupunki}
+            onChange={(e) => setUusiAsunto({ ...uusiAsunto, kaupunki: e.target.value })}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Kaupunginosa"
+            value={uusiAsunto.kaupunginosa}
+            onChange={(e) => setUusiAsunto({ ...uusiAsunto, kaupunginosa: e.target.value })}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Status"
+            value={uusiAsunto.status}
+            onChange={(e) => setUusiAsunto({ ...uusiAsunto, status: e.target.value })}
+          />
+        </div>
+        <button onClick={handleCreate}>Lisää</button>
+      </div>
+
 
 
 
