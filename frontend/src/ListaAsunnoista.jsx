@@ -56,7 +56,7 @@ const ListaAsunnoista = () => {
   // Päivittää tietoja
 
   const handleUpdate = () => {
-    fetch(`http://localhost:8080/asunnot/${editAsunto.asuntoId}`, {
+    fetch(`http://localhost:8080/api/asunnot/${editAsunto.asuntoId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

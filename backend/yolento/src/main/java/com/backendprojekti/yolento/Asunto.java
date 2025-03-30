@@ -16,8 +16,7 @@ public class Asunto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long asuntoId;
 
-    @Version
-    private Long version;
+    
     
     private String osoite;
     private String kaupunki;
