@@ -62,10 +62,6 @@ const VuokrasopimusPage = () => {
 
   // Päivittää vuokrasopimuksen
   const handleUpdate = () => {
-    if (!editVuokrasopimus || !editVuokrasopimus.id) {
-      console.error("Virhe: editVuokrasopimus ei ole määritelty oikein.");
-      return;
-    }
 
     fetch(`http://localhost:8080/api/vuokrasopimukset/${editVuokrasopimus.id}`, {
       method: "PUT",

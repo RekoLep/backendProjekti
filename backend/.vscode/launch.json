@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-YolentoApplication<yolento>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.backendprojekti.yolento.YolentoApplication",
+            "projectName": "yolento",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

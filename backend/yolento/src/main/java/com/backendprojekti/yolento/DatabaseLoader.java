@@ -39,16 +39,16 @@ public class DatabaseLoader implements CommandLineRunner {
         
 
         
-        asuntoRepository.save(new Asunto(1L, "Mannerheimintie 10", "Helsinki", "Kamppi", "Vuokrattu"));
-        asuntoRepository.save(new Asunto(2L, "Aleksanterinkatu 25", "Helsinki", "Kruununhaka", "Vuokrattu"));
-        asuntoRepository.save(new Asunto(3L, "Itäkatu 5", "Helsinki", "Itäkeskus", "Vuokrattu"));
-        asuntoRepository.save(new Asunto(4L, "Hämeentie 45", "Helsinki", "Kallio", "Vapaa"));
-        asuntoRepository.save(new Asunto(5L, "Pohjoisesplanadi 3", "Helsinki", "Kaartinkaupunki", "Vapaa"));
-        asuntoRepository.save(new Asunto(6L, "Leppävaarankatu 10", "Espoo", "Leppävaara", "Vapaa"));
-        asuntoRepository.save(new Asunto(7L, "Tapiolantie 15", "Espoo", "Tapiola", "Vapaa"));
-        asuntoRepository.save(new Asunto(8L, "Myyrmäentie 7", "Vantaa", "Myyrmäki", "Vapaa"));
-        asuntoRepository.save(new Asunto(9L, "Tikkurilantie 12", "Vantaa", "Tikkurila", "Vapaa"));
-        asuntoRepository.save(new Asunto(10L, "Martinlaaksontie 20", "Vantaa", "Martinlaakso", "Vapaa"));
+        asuntoRepository.save(new Asunto("Mannerheimintie 10", "Helsinki", "Kamppi", "Vuokrattu"));
+        asuntoRepository.save(new Asunto("Aleksanterinkatu 25", "Helsinki", "Kruununhaka", "Vuokrattu"));
+        asuntoRepository.save(new Asunto("Itäkatu 5", "Helsinki", "Itäkeskus", "Vuokrattu"));
+        asuntoRepository.save(new Asunto("Hämeentie 45", "Helsinki", "Kallio", "Vapaa"));
+        asuntoRepository.save(new Asunto("Pohjoisesplanadi 3", "Helsinki", "Kaartinkaupunki", "Vapaa"));
+        asuntoRepository.save(new Asunto("Leppävaarankatu 10", "Espoo", "Leppävaara", "Vapaa"));
+        asuntoRepository.save(new Asunto("Tapiolantie 15", "Espoo", "Tapiola", "Vapaa"));
+        asuntoRepository.save(new Asunto("Myyrmäentie 7", "Vantaa", "Myyrmäki", "Vapaa"));
+        asuntoRepository.save(new Asunto("Tikkurilantie 12", "Vantaa", "Tikkurila", "Vapaa"));
+        asuntoRepository.save(new Asunto("Martinlaaksontie 20", "Vantaa", "Martinlaakso", "Vapaa"));
 
 
         Optional<Asiakkaat> asiakas1 = asiakkaatRepository.findById(1L);

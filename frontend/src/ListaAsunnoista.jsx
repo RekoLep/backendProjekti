@@ -6,17 +6,11 @@ const ListaAsunnoista = () => {
   const [uusiAsunto, setUusiAsunto] = useState({
     osoite: "",
     kaupunki: "",
-    kaupunginosa: "",
+    kaupunginOsa: "",
     status: "",
   });
   const [editAsunto, setEditAsunto] = useState(null)
   const [deleteId, setDeleteId] = useState("");
-  const handleEdit = (id) => {
-    const asunto = asunnot.find((v) => v.id === id);
-    if (asunto) {
-      setEditAsunto({ ...asunto });
-    }
-  };
   // Hakee kaikki asunnot
   useEffect(() => {
     fetch("http://localhost:8080/api/asunnot")
@@ -29,10 +23,10 @@ const ListaAsunnoista = () => {
 
   const handleCreate = () => {
     const uusiAsuntoData = {
-      osoite: "",
-      kaupunki: "",
-      kaupunginosa: "",
-      status: "",
+      osoite: uusiAsunto.osoite,
+      kaupunki: uusiAsunto.kaupunki,
+      kaupunginOsa: uusiAsunto.kaupunginOsa,
+      status: uusiAsunto.status,
     };
 
     fetch("http://localhost:8080/api/asunnot", {
@@ -40,7 +34,7 @@ const ListaAsunnoista = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON - stringify(uusiAsuntoData),
+      body: JSON.stringify(uusiAsuntoData),
     })
       .then((response) => {
         if (!response.ok) {
@@ -51,10 +45,10 @@ const ListaAsunnoista = () => {
       .then((data) => {
         setAsunnot([...asunnot, data]);
         setUusiAsunto({
-          asiakasId: "",
-          asuntoId: "",
-          aloitusPvm: "",
-          loppuPvm: "",
+          osoite: "",
+          kaupunki: "",
+          kaupunginOsa: "",
+          status: "",
         });
       })
   }
@@ -62,31 +56,27 @@ const ListaAsunnoista = () => {
   // Päivittää tietoja
 
   const handleUpdate = () => {
-    fetch('http://localhost:8080/api/asunnot/${editAsunto.id}', {
-      method: "PUT", headers: { "Content-Type": "application/json", },
+    fetch(`http://localhost:8080/asunnot/${editAsunto.asuntoId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
-        id: editAsunto.id,
+        asuntoId: Number(editAsunto.asuntoId),
         osoite: editAsunto.osoite,
         kaupunki: editAsunto.kaupunki,
-        kaupunginosa: editAsunto.kaupunginosa,
-        status: editAsunto.status,
+        kaupunginOsa: editAsunto.kaupunginOsa,
+        status: editAsunto.status
       })
     })
-      .then((response) => {
+      .then(response => {
         if (!response.ok) {
-          throw new Error("Päivitys epäonnistui.");
+          return response.text().then(text => { throw new Error(text) });
         }
         return response.json();
       })
-      .then((data) => {
-        setAsunnot(
-          asunnot.map((v) =>
-            v.id === data.id ? data : v
-          )
-        );
-        setEditAsunto(null);
-      })
-      .catch((error) => console.error("Virhe vuokrasopimuksen päivittämisessä:", error));
+      .then(data => console.log("Päivitetty asunto:", data))
+      .catch(error => console.error("Virhe päivityksessä:", error));
   }
 
   // Poistaa asunnon
@@ -134,6 +124,7 @@ const ListaAsunnoista = () => {
               <td>{asunto.status}</td>
               <td>
                 <button onClick={() => setDeleteId(asunto.asuntoId)}>Poista</button>
+                <button onClick={() => setEditAsunto(asunto)}>Päivitä</button>
               </td>
             </tr>
           ))}
@@ -148,6 +139,59 @@ const ListaAsunnoista = () => {
           <button onClick={() => setDeleteId("")}>Peruuta</button>
         </div>
       )}
+
+      {/* Muokkaa asunnon tietoja */}
+      {editAsunto && (
+        <div>
+          <h2>Muokkaa asunnon tietoja</h2>
+          <div>
+            <input
+              type="text"
+              value={editAsunto.osoite}
+              onChange={(e) =>
+                setEditAsunto({
+                  ...editAsunto,
+                  osoite: { ...editAsunto.osoite, osoite: Number(e.target.value) }
+                })
+              }
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Kaupunki"
+              value={editAsunto.kaupunki}
+              onChange={(e) =>
+                setEditAsunto({ ...editAsunto, kaupunki: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Kaupunginosa"
+              value={editAsunto.kaupunginOsa}
+              onChange={(e) =>
+                setEditAsunto({ ...editAsunto, kaupunginOsa: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Status"
+              value={editAsunto.status}
+              onChange={(e) =>
+                setEditAsunto({ ...editAsunto, status: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <button onClick={handleUpdate}>Päivitä</button>
+          </div>
+        </div>
+      )}
+
 
       {/*Uuden asunnon lisäys*/}
       <div>
@@ -172,8 +216,8 @@ const ListaAsunnoista = () => {
           <input
             type="text"
             placeholder="Kaupunginosa"
-            value={uusiAsunto.kaupunginosa}
-            onChange={(e) => setUusiAsunto({ ...uusiAsunto, kaupunginosa: e.target.value })}
+            value={uusiAsunto.kaupunginOsa}
+            onChange={(e) => setUusiAsunto({ ...uusiAsunto, kaupunginOsa: e.target.value })}
           />
         </div>
         <div>
@@ -186,6 +230,8 @@ const ListaAsunnoista = () => {
         </div>
         <button onClick={handleCreate}>Lisää</button>
       </div>
+
+
 
 
 
