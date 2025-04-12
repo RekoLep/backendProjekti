@@ -2,8 +2,8 @@
 # Mvn Build
 #
 FROM maven:3.8.6-eclipse-temurin-17-focal AS build
-COPY backend/pom.xml /home/app
-COPY backend/src /home/app/src
+COPY pom.xml /home/app
+COPY src /home/app/src
 RUN mvn -f /home/app/pom.xml clean package
 
 #
