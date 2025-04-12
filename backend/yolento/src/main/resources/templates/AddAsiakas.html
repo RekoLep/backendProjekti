@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lisää uusi asiakas</title>
+</head>
+<body>
+    <h2>Lisää uusi asiakas</h2>
+    <form th:object="${asiakas}" th:action="@{/saveasiakas}" method="post">
+        <label for="etunimi">Etunimi:</label>
+        <input type="text" id="etunimi" th:field="*{etunimi}" required />
+        <div style="clear: both; display: block; height: 10px;"></div>
+    
+        <label for="sukunimi">Sukunimi:</label>
+        <input type="text" id="sukunimi" th:field="*{sukunimi}" required />
+        <div style="clear: both; display: block; height: 10px;"></div>
+    
+        <label for="puhelinnumero">Puhelinnumero:</label>
+        <input type="text" id="puhelinnumero" th:field="*{puhelinnumero}" required />
+        <div style="clear: both; display: block; height: 10px;"></div>
+    
+        <label for="sahkoposti">Sähköposti:</label>
+        <input type="text" id="sahkoposti" th:field="*{sahkoposti}" required />
+        <!-- Virheilmoitus sähköpostille -->
+        <div style="color: red;" th:if="${#fields.hasErrors('sahkoposti')}" th:errors="*{sahkoposti}"></div>
+        <div style="clear: both; display: block; height: 10px;"></div>
+    
+        <input type="submit" value="Lisää asiakas"> </input>
+    </form>
+</body>
+</html>

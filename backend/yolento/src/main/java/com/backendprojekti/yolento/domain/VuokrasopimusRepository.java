@@ -1,4 +1,4 @@
-package com.backendprojekti.yolento;
+package com.backendprojekti.yolento.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.backendprojekti.yolento;
+package com.backendprojekti.yolento.domain;
 
 import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;

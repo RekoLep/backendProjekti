@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lisää asunto</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h2>Lisää uusi asunto</h2>
+    <form th:object="${asunto}" th:action="@{/saveasunto}" method="post">
+        <label for="osoite">Osoite:</label>
+        <input type="text" id="osoite" th:field="*{osoite}" required />
+        <div style="clear: both; display: block; height: 10px;"></div>
+    
+        <label for="kaupunki">Kaupunki:</label>
+        <input type="text" id="kaupunki" th:field="*{kaupunki}" required />
+        <div style="clear: both; display: block; height: 10px;"></div>
+    
+        <label for="kaupunginOsa">Kaupunginosa:</label>
+        <input type="text" id="kaupunginOsa" th:field="*{kaupunginOsa}" required />
+        <div style="clear: both; display: block; height: 10px;"></div>
+    
+        <label for="status">Status:</label>
+        <input type="text" id="status" th:field="*{status}" required />
+        <div style="clear: both; display: block; height: 10px;"></div>
+    
+        <input type="submit" value="Lisää asunto" />
+    </form>
+</body>
+</html>

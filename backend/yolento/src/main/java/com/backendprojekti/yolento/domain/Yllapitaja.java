@@ -1,4 +1,4 @@
-package com.backendprojekti.yolento;
+package com.backendprojekti.yolento.domain;
 
 public class Yllapitaja {
     private String etunimi;

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <title>Asunnot</title>
+</head>
+<body>
+    <h1>Asunnot</h1>
+   
+        <table class="table table-striped">
+            <tr>
+                <th sec:authorize="hasAuthority('ADMIN')">ID</th>
+                <th>Osoite</th>
+                <th>Kaupunki</th>
+                <th>Kaupunginosa</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        
+            <tr th:each="asunto : ${asunnot}">
+                <td sec:authorize="hasAuthority('ADMIN')" th:text="${asunto.asuntoId}"></td>
+                <td th:text="${asunto.osoite}"></td>
+                <td th:text="${asunto.kaupunki}"></td>
+                <td th:text="${asunto.kaupunginOsa}"></td>
+                <td th:text="${asunto.status}"></td>
+                <td>
+                    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/deleteAsunto/' + ${asunto.asuntoId}}"  class="btn btn-sm btn-danger">Poista</a>
+                </td>
+            </tr>
+        </table>
+    
+    <div sec:authorize="hasAuthority('ADMIN')">
+    <a href="/addasunto">Lisää asunto</a> 
+    </div>
+
+    
+    <div>
+    <a href="http://localhost:8080/index">Takaisin etusivulle</a>
+    </div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.backendprojekti.yolento;
+package com.backendprojekti.yolento.domain;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;

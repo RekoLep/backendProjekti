@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lisää vuokrasopimus</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h2>Lisää uusi vuokrasopimus</h2>
+    <form th:object="${vuokrasopimus}" th:action="@{/savevuokrasopimus}" method="post">
+        
+        <label for="asiakas">Asiakas:</label>
+        <select id="asiakas" th:field="*{asiakas.asiakasId}" required>
+            <option th:each="asiakas : ${asiakkaat}" 
+                    th:value="${asiakas.asiakasId}" 
+                    th:text="${asiakas.etunimi} + ' ' + ${asiakas.sukunimi}">
+            </option>
+        </select>
+        <div style="clear: both; display: block; height: 10px;"></div>
+
+        <label for="asunto">Asunto:</label>
+        <select id="asunto" th:field="*{asunto.asuntoId}" required>
+            <option th:each="asunto : ${asunnot}" 
+                    th:value="${asunto.asuntoId}" 
+                    th:text="${asunto.osoite} + ', ' + ${asunto.kaupunki}">
+            </option>
+        </select>
+        <div style="clear: both; display: block; height: 10px;"></div>
+
+        <label for="alkamisaika">Alkamisaika:</label>
+        <input type="date" id="alkamisaika" th:field="*{alkamisaika}" required />
+        <div style="clear: both; display: block; height: 10px;"></div>
+
+        <label for="paattymisaika">Päättymisaika:</label>
+        <input type="date" id="paattymisaika" th:field="*{paattymisaika}" />
+        <div style="clear: both; display: block; height: 10px;"></div>
+
+        <input type="submit" value="Lisää vuokrasopimus" />
+    </form>
+</body>
+</html>

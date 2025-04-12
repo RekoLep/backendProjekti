@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <title>Vuokrasopimukset</title>
+</head>
+<body>
+    <h1>Vuokrasopimukset</h1>
+
+    <table class="table table-striped">
+       
+            <tr>
+                <th>ID</th>
+                <th>Asiakas</th>
+                <th>Asunto</th>
+                <th>Alkamisaika</th>
+                <th>Päättymisaika</th>
+                <th></th>
+            </tr>
+        
+            <tr th:each="sopimus : ${vuokrasopimukset}">
+                <td th:text="${sopimus.id}"></td>
+                <td th:text="${sopimus.asiakas.etunimi + ' ' + sopimus.asiakas.sukunimi}"></td>
+                <td th:text="${sopimus.asunto.osoite}"></td>
+                <td th:text="${sopimus.alkamisaika}"></td>
+                <td th:text="${sopimus.paattymisaika}"></td>
+                <td>
+                    <a th:href="@{'/deleteVuokrasopimus/' + ${sopimus.id}}"  class="btn btn-sm btn-danger">Poista</a>
+                </td>
+            </tr>
+        
+    </table>
+    <a href="/addvuokrasopimus">Lisää vuokrasopimus</a> 
+    <div>
+    <p><a href="/index">Takaisin etusivulle</a></p>
+    </div>
+</body>
+</html>

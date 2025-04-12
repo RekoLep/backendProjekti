@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <title>Pääsivu</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Tervetuloa vuokra-asuntokaupan nettisivuille</h1>
+                <h2 sec:authorize="hasAuthority('USER')">Katso vapaina olevia asuntoja:</h2>
+            </div>
+            <div class="col-md-4 text-end" style="padding:20px 0">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+                </form>
+            </div>
+        </div>
+        
+            
+                <table class="table table-striped">
+                    <li><a href="/asunnot-nakyma">Asunnot</a></li>
+                    <li sec:authorize="hasAuthority('ADMIN')"><a href="/asiakkaat-nakyma">Asiakkaat</a></li>
+                    <li sec:authorize="hasAuthority('ADMIN')"><a href="/vuokrasopimukset-nakyma">Vuokrasopimukset</a></li>
+                </table>
+            
+        
+    </div>
+</body>
+</html>
